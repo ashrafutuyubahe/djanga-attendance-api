@@ -15,11 +15,19 @@ def add_student(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('mark_attendance')
+            form = StudentForm()   
+            #pop out the message using alert in html
+            message = 'Student added successfully!'
+            
+            return render(request, 'attendance/add_student.html', {
+                'form': form,
+                'message': message
+            })
+            # StudentForm()            
+            # return redirect('mark_attendance')
     else:
-        form = StudentForm()
-    
-    return render(request, 'attendance/add_student.html', {'form': form})
+        form = StudentForm()    
+        return render(request, 'attendance/add_student.html', {'form': form})
     
 def mark_attendance(request):
     students = Student.objects.all()
@@ -39,3 +47,4 @@ def attendance_list(request):
     records = Attendance.objects.select_related('student').order_by('-date')
     # records = Attendance.objects.select_related('student').all()
     return render(request, 'attendance/attendance_list.html', {'attendance_records': records})
+

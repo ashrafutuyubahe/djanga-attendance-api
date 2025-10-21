@@ -10,6 +10,8 @@
                 <tr>
                     <th>Student Name</th>
                     <th>Classroom</th>
+                    <th>Gender</th>
+                    <th>Residence Status</th>
                     <th>Present</th>
                 </tr>
             </thead>
@@ -18,13 +20,15 @@
                 <tr>
                     <td>{{ student.first_name }}</td>
                     <td>{{ student.classroom }}</td>
+                    <td>{{ student.get_gender_display }}</td>
+                    <td>{{ student.get_residence_status_display }}</td>
                     <td>
                         <input type="checkbox" name="present_{{ student.id }}" id="present_{{ student.id }}">
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="3">No students found. <a href="{% url 'student_form' %}">Add a student</a></td>
+                    <td colspan="5">No students found. <a href="{% url 'student_form' %}">Add a student</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

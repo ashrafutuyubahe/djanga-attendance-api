@@ -4,8 +4,22 @@ from django.utils import timezone
 # Create your models here.
 
 class Student(models.Model):
+    GENDER_CHOICES = [
+        ('male', 'Male'),
+        ('female', 'Female'),
+    ]
+    
+    RESIDENCE_CHOICES = [
+        ('in_school', 'Lives in School'),
+        ('not_in_school', 'Does not Live in School'),
+    ]
+    
     first_name = models.CharField(max_length=100)
     classroom = models.CharField(max_length=50)
+    # Added with a comment to force migration detection
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='female')
+    residence_status = models.CharField(max_length=20, choices=RESIDENCE_CHOICES, default='in_school')
+    
     class Meta:
         db_table = "students"
 

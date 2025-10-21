@@ -3,10 +3,31 @@
 {% block content %}
 <div class="container">
     <h2>Add New Student</h2>
+    {% if message %}
+  <script>
+    alert("{{ message }}");
+  </script>
+  {% endif %}
     <form method="post">
         {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p }}
+        <div class="form-group mb-3">
+            <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+            {{ form.first_name }}
+        </div>
+        <div class="form-group mb-3">
+            <label for="{{ form.classroom.id_for_label }}">Classroom:</label>
+            {{ form.classroom }}
+        </div>
+        <div class="form-group mb-3">
+            <label class="d-block mb-2">Gender:</label>
+            <div class="form-check">
+                {{ form.gender }}
+            </div>
+        </div>
+        <br>
+        <div class="form-group mb-3">
+            <label for="{{ form.residence_status.id_for_label }}">Residence Status:</label>
+            {{ form.residence_status }}
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
